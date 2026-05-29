@@ -15,15 +15,31 @@ export function AuthProvider({ children }) {
     const empresaGuardada = localStorage.getItem('empresa');
     const empresaIdGuardada = localStorage.getItem('empresaId');
 
-    if (token && usuarioGuardado) {
-      setUsuario(JSON.parse(usuarioGuardado));
+    if (token) {
+      if (usuarioGuardado) setUsuario(JSON.parse(usuarioGuardado));
       if (empresaGuardada) setEmpresa(JSON.parse(empresaGuardada));
 
-      // Fetch empresas list
+      // Refresh user permissions from server
+      refrescarPermisos();
       cargarEmpresas();
+    } else {
+      setCargando(false);
     }
-    setCargando(false);
   }, []);
+
+  const refrescarPermisos = async () => {
+    try {
+      const { data } = await api.get('/auth/me');
+      const guardado = JSON.parse(localStorage.getItem('usuario') || '{}');
+      const usuarioActualizado = { ...guardado, permisos: data.permisos, rol: data.rol };
+      setUsuario(usuarioActualizado);
+      localStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+    } catch {
+      logout();
+    } finally {
+      setCargando(false);
+    }
+  };
 
   const cargarEmpresas = async () => {
     try {

@@ -2,6 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./models');
+const errorHandler = require('./middleware/errorHandler');
+const empresaMiddleware = require('./middleware/empresa');
+const seed = require('./seeds/seed');
+
 const {
   authRoutes,
   usuariosRoutes,
@@ -20,10 +24,8 @@ const {
   productoRoutes,
   flujoEfectivoRoutes,
   dashboardRoutes,
+  feedbackRoutes,
 } = require('./routes');
-const errorHandler = require('./middleware/errorHandler');
-const empresaMiddleware = require('./middleware/empresa');
-const seed = require('./seeds/seed');
 
 const app = express();
 
@@ -58,6 +60,7 @@ app.use('/api/clientes-proveedores', clienteProveedorRoutes);
 app.use('/api/productos', productoRoutes);
 app.use('/api/reportes/flujo-efectivo', flujoEfectivoRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });

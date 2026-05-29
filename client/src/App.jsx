@@ -21,6 +21,7 @@ import Ventas from './pages/Ventas';
 import ClientesProveedores from './pages/ClientesProveedores';
 import Inventario from './pages/Inventario';
 import FlujoEfectivo from './pages/FlujoEfectivo';
+import FeedbackAdmin from './pages/FeedbackAdmin';
 import { useContext } from 'react';
 import { Toaster } from 'react-hot-toast';
 
@@ -57,6 +58,7 @@ function AppRoutes() {
       <Route path="/inventario" element={<ProtectedRoute requierePermiso="comprobantes:read"><Layout><Inventario /></Layout></ProtectedRoute>} />
       <Route path="/usuarios" element={<ProtectedRoute requierePermiso="usuarios:read"><Layout><Usuarios /></Layout></ProtectedRoute>} />
       <Route path="/roles" element={<ProtectedRoute requierePermiso="roles:read"><Layout><Roles /></Layout></ProtectedRoute>} />
+      <Route path="/feedback-admin" element={<ProtectedRoute requierePermiso="feedback:read"><Layout><FeedbackAdmin /></Layout></ProtectedRoute>} />
       
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -1,4 +1,4 @@
-const { Usuario, Rol } = require('../models');
+const { Usuario, Rol, Permiso } = require('../models');
 const { generarToken } = require('../services/auth.service');
 
 async function login(req, res) {
@@ -11,7 +11,7 @@ async function login(req, res) {
 
     const usuario = await Usuario.findOne({
       where: { username },
-      include: [{ model: Rol }],
+      include: [{ model: Rol, include: [{ model: Permiso, through: { attributes: [] } }] }],
     });
 
     if (!usuario) {
@@ -99,7 +99,7 @@ async function register(req, res) {
 async function getMe(req, res) {
   try {
     const usuario = await Usuario.findByPk(req.usuario.id, {
-      include: [{ model: Rol }],
+      include: [{ model: Rol, include: [{ model: Permiso, through: { attributes: [] } }] }],
     });
 
     if (!usuario) {

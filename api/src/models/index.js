@@ -17,6 +17,7 @@ const Venta = require('./Venta');
 const ClienteProveedor = require('./ClienteProveedor');
 const Producto = require('./Producto');
 const MovimientoInventario = require('./MovimientoInventario');
+const Feedback = require('./Feedback');
 
 // Roles y Permisos (muchos a muchos)
 Rol.belongsToMany(Permiso, { through: RolPermiso, foreignKey: 'rolId' });
@@ -114,6 +115,10 @@ MovimientoInventario.belongsTo(Producto, { foreignKey: 'productoId' });
 Empresa.hasMany(MovimientoInventario, { foreignKey: 'empresaId' });
 MovimientoInventario.belongsTo(Empresa, { foreignKey: 'empresaId' });
 
+// Feedback
+Usuario.hasMany(Feedback, { foreignKey: 'usuarioId' });
+Feedback.belongsTo(Usuario, { foreignKey: 'usuarioId' });
+
 module.exports = {
   sequelize,
   Rol,
@@ -134,4 +139,5 @@ module.exports = {
   ClienteProveedor,
   Producto,
   MovimientoInventario,
+  Feedback,
 };

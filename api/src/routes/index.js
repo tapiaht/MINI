@@ -15,6 +15,7 @@ const clienteProveedorRoutes = require('./clienteProveedor.routes');
 const productoRoutes = require('./producto.routes');
 const flujoEfectivoRoutes = require('./flujoEfectivo.routes');
 const dashboardRoutes = require('./dashboard.routes');
+const feedbackRoutes = require('./feedback.routes');
 
 module.exports = {
   authRoutes,
@@ -34,4 +35,5 @@ module.exports = {
   productoRoutes,
   flujoEfectivoRoutes,
   dashboardRoutes,
+  feedbackRoutes,
 };

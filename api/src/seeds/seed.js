@@ -25,6 +25,8 @@ async function seed() {
     { nombre: 'Ver Reportes', codigo: 'reportes:read', modulo: 'reportes' },
     { nombre: 'Exportar Reportes', codigo: 'reportes:export', modulo: 'reportes' },
     { nombre: 'Configuración', codigo: 'config:update', modulo: 'config' },
+    { nombre: 'Enviar Feedback', codigo: 'feedback:create', modulo: 'feedback' },
+    { nombre: 'Gestionar Feedback', codigo: 'feedback:read', modulo: 'feedback' },
   ];
 
   for (const p of permisos) {

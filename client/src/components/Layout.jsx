@@ -2,10 +2,11 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
+import FeedbackModal from './FeedbackModal';
 import {
   LayoutDashboard, FileText, BookOpen, BarChart3, PieChart, TrendingUp,
   List, Settings, Users, Shield, LogOut, Menu, X, Receipt, ShoppingCart,
-  TrendingUpDown, UserCheck, Package, DollarSign, Bell,
+  TrendingUpDown, UserCheck, Package, DollarSign, Bell, MessageSquare,
 } from 'lucide-react';
 
 const menuItems = [
@@ -27,6 +28,7 @@ const menuItems = [
   { path: '/configuracion', label: 'Configuración', icon: Settings, permiso: 'config:update' },
   { path: '/usuarios', label: 'Usuarios', icon: Users, permiso: 'usuarios:read' },
   { path: '/roles', label: 'Roles', icon: Shield, permiso: 'roles:read' },
+  { path: '/feedback-admin', label: 'Feedback', icon: MessageSquare, permiso: 'feedback:read' },
 ];
 
 export default function Layout({ children }) {
@@ -179,6 +181,8 @@ export default function Layout({ children }) {
           {children}
         </main>
       </div>
+
+      <FeedbackModal />
     </div>
   );
 }
